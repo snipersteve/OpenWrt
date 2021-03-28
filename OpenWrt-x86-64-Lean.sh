@@ -171,7 +171,6 @@ CONFIG_PACKAGE_luci-app-passwall_INCLUDE_kcptun=y
 CONFIG_PACKAGE_luci-app-passwall_INCLUDE_haproxy=y
 CONFIG_PACKAGE_luci-app-passwall_INCLUDE_dns2socks=y
 CONFIG_PACKAGE_luci-app-passwall_INCLUDE_pdnsd=y
-CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Xray=n
 CONFIG_PACKAGE_https-dns-proxy=y
 CONFIG_PACKAGE_kcptun-client=y
 CONFIG_PACKAGE_chinadns-ng=y
@@ -192,9 +191,6 @@ CONFIG_PACKAGE_shadowsocksr-libev-alt=y
 CONFIG_PACKAGE_shadowsocksr-libev-ssr-local=y
 CONFIG_PACKAGE_pdnsd-alt=y
 CONFIG_PACKAGE_dns2socks=y
-CONFIG_PACKAGE_xray=n
-CONFIG_XRAY_COMPRESS_UPX=n
-CONFIG_XRAY_EXCLUDE_ASSETS=n
 EOF
 
 # 常用LuCI插件:
