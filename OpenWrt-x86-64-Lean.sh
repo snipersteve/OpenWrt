@@ -209,6 +209,9 @@ CONFIG_PACKAGE_luci-app-xlnetacc=y #迅雷快鸟
 CONFIG_PACKAGE_luci-app-sfe=y #高通开源的 Shortcut FE 转发加速引擎
 CONFIG_PACKAGE_luci-app-adguardhome=y #ADguardHome去广告服务
 
+CONFIG_PACKAGE_luci-app-jd-dailybonus=n #JD多合一签到
+CONFIG_PACKAGE_luci-app-uugamebooster=n #UU游戏加速器
+
 # CONFIG_PACKAGE_luci-app-adbyby-plus is not set #adbyby去广告
 # CONFIG_PACKAGE_luci-app-smartdns=y #smartdns服务器
 # CONFIG_PACKAGE_luci-app-wol is not set #网络唤醒
