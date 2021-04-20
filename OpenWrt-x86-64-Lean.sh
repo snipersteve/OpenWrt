@@ -29,6 +29,7 @@ sed -i 's#192.168.1.1#192.168.0.1#g' package/base-files/files/bin/config_generat
 sed -i 's@.*CYXluq4wUazHjmCDBCqXF*@#&@g' $ZZZ                                             # 取消系统默认密码
 sed -i "/uci commit system/i\uci set system.@system[0].hostname='OpenWrt-X86'" $ZZZ       # 修改主机名称为OpenWrt-X86
 sed -i "s/OpenWrt /Jinlife build $(TZ=UTC-8 date "+%Y.%m.%d") @ OpenWrt /g" $ZZZ              # 增加自己个性名称
+sed -i 's@.*view/admin_status/index*@#&@g' $ZZZ                                           # 在首页显示一些服务
 
 sed -i 's#option commit_interval 24h#option commit_interval 10m#g' feeds/packages/net/nlbwmon/files/nlbwmon.config               # 修改流量统计写入为10分钟
 sed -i 's#option database_directory /var/lib/nlbwmon#option database_directory /etc/config/nlbwmon_data#g' feeds/packages/net/nlbwmon/files/nlbwmon.config               # 修改流量统计数据存放默认位置
@@ -165,6 +166,7 @@ CONFIG_PACKAGE_luci-app-xlnetacc=y #迅雷快鸟
 CONFIG_PACKAGE_luci-app-adguardhome=y #ADguardHome去广告服务
 CONFIG_PACKAGE_luci-app-flowoffload=y #开源 Linux Flow Offload 驱动
 CONFIG_PACKAGE_luci-app-arpbind=y #IP/MAC ARP绑定
+CONFIG_PACKAGE_luci-app-socat=y #IPV6 端口映射 IPV4
 
 CONFIG_PACKAGE_luci-app-autoreboot=n #定时重启
 CONFIG_PACKAGE_luci-app-sfe=n #高通开源的 Shortcut FE 转发加速引擎
