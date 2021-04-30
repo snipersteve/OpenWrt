@@ -9,8 +9,8 @@ sed -i 's#src-git luci https://github.com/Lienol/openwrt-luci.git;17.01#src-git 
 cat feeds.conf.default
 
 # 添加第三方软件包
-#git clone https://github.com/db-one/dbone-packages.git -b 18.06 package/dbone-packages
-git clone https://github.com/garypang13/openwrt-packages package/graypang13-packages
+git clone https://github.com/db-one/dbone-packages.git -b 18.06 package/dbone-packages
+# git clone https://github.com/garypang13/openwrt-packages package/graypang13-packages
 
 # 更新并安装源
 ./scripts/feeds clean
@@ -22,8 +22,7 @@ rm -rf package/lean/luci-app-flowoffload
 
 # 为19.07添加libcap-bin依赖
 rm -rf feeds/packages/libs/libcap
-svn co https://github.com/openwrt/openwrt/trunk/package/libs/libcap feeds/packages/libs/libcap
-#svn co https://github.com/openwrt/packages/trunk/libs/libcap feeds/packages/libs/libcap
+svn co https://github.com/openwrt/packages/trunk/libs/libcap feeds/packages/libs/libcap
 
 # 自定义定制选项
 ZZZ="package/default-settings/files/zzz-default-settings"
