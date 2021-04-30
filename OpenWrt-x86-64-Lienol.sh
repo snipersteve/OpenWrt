@@ -28,6 +28,8 @@ svn co https://github.com/openwrt/openwrt/trunk/package/libs/libcap feeds/packag
 ZZZ="package/default-settings/files/zzz-default-settings"
 #
 sed -i 's#192.168.1.1#192.168.0.1#g' package/base-files/files/bin/config_generate 	      #定制默认IP
+sed -i 's#max-width:200px#max-width:1000px#g' feeds/luci/modules/luci-mod-admin-full/luasrc/view/admin_status/index.htm #修改首页样式
+sed -i 's#max-width:200px#max-width:1000px#g' feeds/luci/modules/luci-mod-admin-full/luasrc/view/admin_status/index_x86.htm #修改X86首页样式
 sed -i 's@.*CYXluq4wUazHjmCDBCqXF*@#&@g' $ZZZ                                             # 取消系统默认密码
 sed -i "/uci commit system/i\uci set system.@system[0].hostname='OpenWrt-X86'" $ZZZ       # 修改主机名称为OpenWrt-X86
 sed -i "s/OpenWrt /Jinlife build $(TZ=UTC-8 date "+%Y.%m.%d") @ OpenWrt /g" $ZZZ          # 增加自己个性名称
