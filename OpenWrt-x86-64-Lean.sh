@@ -134,10 +134,55 @@ CONFIG_PACKAGE_luci-app-oaf=y #应用过滤
 # CONFIG_PACKAGE_luci-app-openclash=y #OpenClash客户端
 # CONFIG_PACKAGE_luci-app-serverchan=y #微信推送
 # CONFIG_PACKAGE_luci-app-eqos=y #IP限速
-CONFIG_PACKAGE_luci-app-ssr-plus=n
 CONFIG_PACKAGE_luci-app-poweroff=y #关机（增加关机功能）
 CONFIG_PACKAGE_luci-theme-edge=y #edge主题
 CONFIG_PACKAGE_luci-app-autotimeset=y #定时重启系统，网络
+
+CONFIG_PACKAGE_coremark=n # Coremark跑分
+
+#GPU WIFI驱动
+CONFIG_PACKAGE_amdgpu-firmware=n
+CONFIG_PACKAGE_ath10k-board-qca9888=n
+CONFIG_PACKAGE_ath10k-board-qca988x=n
+CONFIG_PACKAGE_ath10k-board-qca9984=n
+CONFIG_PACKAGE_ath10k-firmware-qca9888=n
+CONFIG_PACKAGE_ath10k-firmware-qca988x=n
+CONFIG_PACKAGE_ath10k-firmware-qca9984=n
+
+#EFI相关
+CONFIG_PACKAGE_grub2=n
+CONFIG_PACKAGE_grub2-efi=n
+
+#视频和摄像头
+CONFIG_PACKAGE_kmod-backlight=n
+CONFIG_PACKAGE_kmod-backlight-pwm=n
+CONFIG_PACKAGE_kmod-drm=n
+CONFIG_PACKAGE_kmod-drm-amdgpu=n
+CONFIG_PACKAGE_kmod-drm-kms-helper=n
+CONFIG_PACKAGE_kmod-drm-radeon=n
+CONFIG_PACKAGE_kmod-drm-ttm=n
+CONFIG_PACKAGE_kkmod-fb=n
+CONFIG_PACKAGE_kkmod-fb-cfb-copyarea=n
+CONFIG_PACKAGE_kkmod-fb-cfb-fillrect=n
+CONFIG_PACKAGE_kkmod-fb-cfb-imgblt=n
+CONFIG_PACKAGE_kkmod-fb-sys-fops=n
+CONFIG_PACKAGE_kkmod-fb-sys-ram=n
+
+# 扩展包
+CONFIG_PACKAGE_kmod-mmc=n
+CONFIG_PACKAGE_kmod-mmc-spi=n
+CONFIG_PACKAGE_kmod-nf-nathelper=n
+CONFIG_PACKAGE_kmod-nf-nathelper-extra=n
+
+EOF
+
+# ShadowsocksR插件:
+cat >> .config <<EOF
+CONFIG_PACKAGE_luci-app-ssr-plus=n
+CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Xray=n
+CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Shadowsocks=n
+CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_ShadowsocksR_Server=n
+CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_ShadowsocksR_Socks=n
 EOF
 
 # Passwall插件:
@@ -208,8 +253,8 @@ EOF
 
 # LuCI主题:
 cat >> .config <<EOF
-CONFIG_PACKAGE_luci-theme-argon=y
-CONFIG_PACKAGE_luci-theme-netgear=y
+CONFIG_PACKAGE_luci-theme-argon=n
+CONFIG_PACKAGE_luci-theme-netgear=n
 EOF
 
 # 常用软件包:
