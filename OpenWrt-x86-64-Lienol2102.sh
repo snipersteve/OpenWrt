@@ -13,8 +13,8 @@ cat feeds.conf.default
 
 
 # 添加第三方软件包
-git clone https://github.com/db-one/dbone-packages.git -b 19.07 package/dbone-packages
-#git clone https://github.com/garypang13/openwrt-packages package/graypang13-packages
+#git clone https://github.com/db-one/dbone-packages.git -b 19.07 package/dbone-packages
+git clone https://github.com/garypang13/openwrt-packages package/graypang13-packages
 
 # 更新并安装源
 ./scripts/feeds clean
