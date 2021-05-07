@@ -190,7 +190,7 @@ CONFIG_PACKAGE_luci-app-usb-printer=n #USB打印机
 CONFIG_PACKAGE_luci-app-mwan3helper=n #多拨负载均衡
 CONFIG_PACKAGE_luci-app-mwan3=n #多线多拨
 CONFIG_PACKAGE_luci-app-hd-idle=n #磁盘休眠
-CONFIG_PACKAGE_luci-app-zerotier=nt #Zerotier内网穿透
+CONFIG_PACKAGE_luci-app-zerotier=n #Zerotier内网穿透
 CONFIG_PACKAGE_luci-app-sqm=n #SQM智能队列管理
 #
 # passwall相关(禁用):
