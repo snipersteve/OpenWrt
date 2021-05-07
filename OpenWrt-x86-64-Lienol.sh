@@ -169,9 +169,9 @@ CONFIG_PACKAGE_luci-app-xlnetacc=y #迅雷快鸟
 CONFIG_PACKAGE_luci-app-arpbind=y #IP/MAC ARP绑定
 CONFIG_PACKAGE_luci-app-adguardhome=y #ADguardHome去广告服务
 CONFIG_PACKAGE_luci-app-socat=y #IPV6 端口映射 IPV4
+CONFIG_PACKAGE_luci-app-flowoffload=y #开源 Linux Flow Offload 驱动
 
 CONFIG_PACKAGE_luci-app-frpc=n #Frp内网穿透
-CONFIG_PACKAGE_luci-app-flowoffload=n #开源 Linux Flow Offload 驱动
 CONFIG_PACKAGE_luci-app-autoreboot=n #定时重启
 CONFIG_PACKAGE_luci-app-sfe=n #高通开源的 Shortcut FE 转发加速引擎
 CONFIG_PACKAGE_luci-app-adbyby-plus=n #adbyby去广告
