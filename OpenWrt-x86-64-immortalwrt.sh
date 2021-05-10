@@ -13,7 +13,7 @@
 
 
 # 添加第三方软件包
-git clone https://github.com/db-one/dbone-packages.git -b 19.07 package/dbone-packages
+#git clone https://github.com/db-one/dbone-packages.git -b 19.07 package/dbone-packages
 #git clone https://github.com/garypang13/openwrt-packages package/graypang13-packages
 
 # 更新并安装源
@@ -27,6 +27,11 @@ rm -rf package/lean/luci-app-flowoffload
 # 为19.07添加libcap-bin依赖
 rm -rf feeds/packages/libs/libcap
 svn co https://github.com/openwrt/openwrt/trunk/package/libs/libcap feeds/packages/libs/libcap
+
+svn co https://github.com/db-one/dbone-packages/branches/19.07/luci-app-poweroff package/dbone-packages/luci-app-poweroff
+svn co https://github.com/db-one/dbone-packages/branches/19.07/luci-app-autotimeset package/dbone-packages/luci-app-autotimeset
+svn co https://github.com/db-one/dbone-packages/branches/19.07/luci-app-socat package/dbone-packages/luci-app-socat
+
 
 # 自定义定制选项
 ZZZ="package/default-settings/files/zzz-default-settings"
