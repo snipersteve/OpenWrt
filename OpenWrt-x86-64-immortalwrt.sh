@@ -33,7 +33,7 @@ svn co https://github.com/openwrt/openwrt/trunk/package/libs/libcap feeds/packag
 
 svn co https://github.com/db-one/dbone-packages/branches/19.07/luci-app-poweroff package/dbone-packages/luci-app-poweroff
 svn co https://github.com/db-one/dbone-packages/branches/19.07/luci-app-autotimeset package/dbone-packages/luci-app-autotimeset
-#svn co https://github.com/db-one/dbone-packages/branches/19.07/luci-app-socat package/dbone-packages/luci-app-socat
+svn co https://github.com/db-one/dbone-packages/branches/19.07/luci-app-socat package/dbone-packages/luci-app-socat
 
 
 # 自定义定制选项
@@ -186,7 +186,12 @@ CONFIG_PACKAGE_kmod-mmc=n
 CONFIG_PACKAGE_kmod-mmc-spi=n
 CONFIG_PACKAGE_kmod-nf-nathelper=n
 CONFIG_PACKAGE_kmod-nf-nathelper-extra=n
+
+CONFIG_NODEJS_14=n
 CONFIG_PACKAGE_node=n
+CONFIG_PACKAGE_libopenssl=y
+CONFIG_PACKAGE_libopenssl-conf=y
+CONFIG_PACKAGE_libopenssl-devcrypto=y
 
 EOF
 
