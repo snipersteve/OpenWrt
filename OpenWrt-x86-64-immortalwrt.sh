@@ -201,10 +201,10 @@ EOF
 cat >> .config <<EOF
 CONFIG_PACKAGE_luci-app-passwall=y
 CONFIG_PACKAGE_https-dns-proxy=y
-CONFIG_PACKAGE_naiveproxy=y
+CONFIG_PACKAGE_naiveproxy=n
 CONFIG_PACKAGE_kcptun-client=y
 CONFIG_PACKAGE_chinadns-ng=y
-CONFIG_PACKAGE_brook=y
+CONFIG_PACKAGE_brook=n
 CONFIG_PACKAGE_trojan-go=y
 EOF
 
@@ -289,6 +289,7 @@ cat >> .config <<EOF
 CONFIG_PACKAGE_curl=y
 CONFIG_PACKAGE_htop=y
 CONFIG_PACKAGE_nano=y
+CONFIG_PACKAGE_node=n
 # CONFIG_PACKAGE_screen=y
 # CONFIG_PACKAGE_tree=y
 # CONFIG_PACKAGE_vim-fuller=y
