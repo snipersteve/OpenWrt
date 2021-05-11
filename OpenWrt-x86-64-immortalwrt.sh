@@ -23,7 +23,7 @@
 # 删除部分默认包
 rm -rf package/lean/luci-theme-argon
 rm -rf package/lean/v2ray-plugin
-rm -rf feeds/packages/net/haproxy
+#rm -rf feeds/packages/net/haproxy
 rm -rf package/lean/luci-app-sfe
 rm -rf package/lean/luci-app-flowoffload
 
@@ -39,14 +39,14 @@ svn co https://github.com/db-one/dbone-packages/branches/19.07/luci-app-autotime
 # 自定义定制选项
 ZZZ="package/lean/default-settings/files/zzz-default-settings"
 #
-sed -i 's#192.168.1.1#192.168.0.1#g' package/base-files/files/bin/config_generate 	      #定制默认IP
+sed -i 's#192.168.1.1#192.168.0.1#g' package/base-files/files/bin/config_generate #定制默认IP
 sed -i 's@.*CYXluq4wUazHjmCDBCqXF*@#&@g' $ZZZ                                             # 取消系统默认密码
 sed -i "/uci commit system/i\uci set system.@system[0].hostname='OpenWrt-X86'" $ZZZ       # 修改主机名称为OpenWrt-X86
-sed -i "s/OpenWrt /Jinlife build $(TZ=UTC-8 date "+%Y.%m.%d") @ OpenWrt /g" $ZZZ          # 增加自己个性名称
+sed -i "s/OpenWrt /Jinlife build $(TZ=UTC-8 date "+%Y.%m.%d") @ OpenWrt /g" $ZZZ              # 增加自己个性名称
 
-sed -i 's#option commit_interval 24h#option commit_interval 60m#g' feeds/packages/net/nlbwmon/files/nlbwmon.config #修改流量统计写入为60分钟
-sed -i 's#option database_directory /var/lib/nlbwmon#option database_directory /etc/config/nlbwmon_data#g' feeds/packages/net/nlbwmon/files/nlbwmon.config #修改流量统计数据存放默认位置
-#sed -i 's#interval: 5#interval: 1#g' package/lean/luci-app-wrtbwmon/htdocs/luci-static/wrtbwmon.js               # wrtbwmon默认刷新时间更改为1秒
+sed -i 's#option commit_interval 24h#option commit_interval 60m#g' feeds/packages/net/nlbwmon/files/nlbwmon.config               # 修改流量统计写入为60分钟
+sed -i 's#option database_directory /var/lib/nlbwmon#option database_directory /etc/config/nlbwmon_data#g' feeds/packages/net/nlbwmon/files/nlbwmon.config               # 修改流量统计数据存放默认位置
+#sed -i 's#interval: 5#interval: 1#g' package/lean/luci-app-wrtbwmon/htdocs/luci-static/wrtbwmon/wrtbwmon.js               # wrtbwmon默认刷新时间更改为1秒
 echo -e '\n\nmsgid "This will delete the database file. Are you sure?"\nmsgstr "这将删除数据库文件, 你确定吗? "' >> package/lean/luci-app-wrtbwmon/po/zh-cn/wrtbwmon.po # wrtbwmon流量统计
 
 # 创建自定义配置文件 - OpenWrt-x86-64
@@ -186,6 +186,7 @@ CONFIG_PACKAGE_kmod-mmc=n
 CONFIG_PACKAGE_kmod-mmc-spi=n
 CONFIG_PACKAGE_kmod-nf-nathelper=n
 CONFIG_PACKAGE_kmod-nf-nathelper-extra=n
+
 EOF
 
 # ShadowsocksR插件:
@@ -201,10 +202,10 @@ EOF
 cat >> .config <<EOF
 CONFIG_PACKAGE_luci-app-passwall=y
 CONFIG_PACKAGE_https-dns-proxy=y
-CONFIG_PACKAGE_naiveproxy=n
+CONFIG_PACKAGE_naiveproxy=y
 CONFIG_PACKAGE_kcptun-client=y
 CONFIG_PACKAGE_chinadns-ng=y
-CONFIG_PACKAGE_brook=n
+CONFIG_PACKAGE_brook=y
 CONFIG_PACKAGE_trojan-go=y
 EOF
 
@@ -221,7 +222,7 @@ CONFIG_PACKAGE_luci-app-wrtbwmon=y #实时流量监测
 CONFIG_PACKAGE_luci-app-xlnetacc=y #迅雷快鸟
 CONFIG_PACKAGE_luci-app-adguardhome=y #ADguardHome去广告服务
 CONFIG_PACKAGE_luci-app-arpbind=y #IP/MAC ARP绑定
-#CONFIG_PACKAGE_luci-app-socat=y #IPV6 端口映射 IPV4
+CONFIG_PACKAGE_luci-app-socat=y #IPV6 端口映射 IPV4
 
 CONFIG_PACKAGE_luci-app-frpc=n #Frp内网穿透
 CONFIG_PACKAGE_luci-app-flowoffload=n #开源 Linux Flow Offload 驱动
@@ -244,33 +245,19 @@ CONFIG_PACKAGE_luci-app-usb-printer=n #USB打印机
 CONFIG_PACKAGE_luci-app-sqm=n #SQM智能队列管理
 CONFIG_PACKAGE_luci-app-jd-dailybonus=n #京东签到服务
 CONFIG_PACKAGE_luci-app-uugamebooster=n #UU游戏加速器
-#
-# passwall相关(禁用):
-#
+
 #
 # VPN相关插件(禁用):
 #
-CONFIG_PACKAGE_luci-app-ipsec-vpnserver-manyusers=n #ipsec VPN服务
-CONFIG_PACKAGE_luci-app-pppoe-relay=n #PPPoE穿透
-CONFIG_PACKAGE_luci-app-pppoe-server=n #PPPoE服务器
-CONFIG_PACKAGE_luci-app-pptp-vpnserver-manyusers=n #PPTP VPN 服务器
-CONFIG_PACKAGE_luci-app-trojan-server=n #Trojan服务器
 CONFIG_PACKAGE_luci-app-v2ray-server=n #V2ray服务器
-CONFIG_PACKAGE_luci-app-brook-server=n #brook服务端
-CONFIG_PACKAGE_luci-app-ssr-libev-server=n #ssr-libev服务端
-CONFIG_PACKAGE_luci-app-ssr-python-pro-server=n #ssr-python服务端
-CONFIG_PACKAGE_luci-app-kcptun=n #Kcptun客户端
+CONFIG_PACKAGE_luci-app-pptp-server=n #PPTP VPN 服务器
 CONFIG_PACKAGE_luci-app-ipsec-vpnd=n #ipsec VPN服务
 CONFIG_PACKAGE_luci-app-openvpn-server=n #openvpn服务
 CONFIG_PACKAGE_luci-app-softethervpn=n #SoftEtherVPN服务器
 #
 # 文件共享相关(禁用):
 #
-CONFIG_PACKAGE_luci-app-aria2=n #Aria2离线下载
 CONFIG_PACKAGE_luci-app-minidlna=n #miniDLNA服务
-CONFIG_PACKAGE_luci-app-kodexplorer=n #可到私有云
-CONFIG_PACKAGE_luci-app-filebrowser=n #File Browser私有云
-CONFIG_PACKAGE_luci-app-fileassistant=n #文件助手
 CONFIG_PACKAGE_luci-app-vsftpd=n #FTP 服务器
 CONFIG_PACKAGE_luci-app-samba=n #网络共享
 CONFIG_PACKAGE_autosamba=n #网络共享
@@ -279,9 +266,8 @@ EOF
 
 # LuCI主题:
 cat >> .config <<EOF
-CONFIG_PACKAGE_luci-theme-bootstrap=n
-CONFIG_PACKAGE_luci-theme-material=n
-CONFIG_PACKAGE_luci-theme-argon-light-mod=n
+CONFIG_PACKAGE_luci-theme-argon=n
+CONFIG_PACKAGE_luci-theme-netgear=n
 EOF
 
 # 常用软件包:
@@ -289,7 +275,6 @@ cat >> .config <<EOF
 CONFIG_PACKAGE_curl=y
 CONFIG_PACKAGE_htop=y
 CONFIG_PACKAGE_nano=y
-CONFIG_PACKAGE_node=n
 # CONFIG_PACKAGE_screen=y
 # CONFIG_PACKAGE_tree=y
 # CONFIG_PACKAGE_vim-fuller=y
@@ -312,7 +297,7 @@ EOF
 # ========================固件定制部分结束========================
 # 
 
+
 sed -i 's/^[ \t]*//g' ./.config
 
 # 配置文件创建完成
-
