@@ -186,6 +186,7 @@ CONFIG_PACKAGE_kmod-mmc=n
 CONFIG_PACKAGE_kmod-mmc-spi=n
 CONFIG_PACKAGE_kmod-nf-nathelper=n
 CONFIG_PACKAGE_kmod-nf-nathelper-extra=n
+CONFIG_PACKAGE_node=n
 
 EOF
 
@@ -202,10 +203,10 @@ EOF
 cat >> .config <<EOF
 CONFIG_PACKAGE_luci-app-passwall=y
 CONFIG_PACKAGE_https-dns-proxy=y
-CONFIG_PACKAGE_naiveproxy=y
+CONFIG_PACKAGE_naiveproxy=n
 CONFIG_PACKAGE_kcptun-client=y
 CONFIG_PACKAGE_chinadns-ng=y
-CONFIG_PACKAGE_brook=y
+CONFIG_PACKAGE_brook=n
 CONFIG_PACKAGE_trojan-go=y
 EOF
 
