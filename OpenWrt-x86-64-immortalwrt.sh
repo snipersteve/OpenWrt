@@ -33,7 +33,7 @@ svn co https://github.com/openwrt/openwrt/trunk/package/libs/libcap feeds/packag
 
 svn co https://github.com/db-one/dbone-packages/branches/19.07/luci-app-poweroff package/dbone-packages/luci-app-poweroff
 svn co https://github.com/db-one/dbone-packages/branches/19.07/luci-app-autotimeset package/dbone-packages/luci-app-autotimeset
-svn co https://github.com/db-one/dbone-packages/branches/19.07/luci-app-socat package/dbone-packages/luci-app-socat
+#svn co https://github.com/db-one/dbone-packages/branches/19.07/luci-app-socat package/dbone-packages/luci-app-socat
 
 
 # 自定义定制选项
@@ -221,7 +221,7 @@ CONFIG_PACKAGE_luci-app-wrtbwmon=y #实时流量监测
 CONFIG_PACKAGE_luci-app-xlnetacc=y #迅雷快鸟
 CONFIG_PACKAGE_luci-app-adguardhome=y #ADguardHome去广告服务
 CONFIG_PACKAGE_luci-app-arpbind=y #IP/MAC ARP绑定
-CONFIG_PACKAGE_luci-app-socat=y #IPV6 端口映射 IPV4
+#CONFIG_PACKAGE_luci-app-socat=y #IPV6 端口映射 IPV4
 
 CONFIG_PACKAGE_luci-app-frpc=n #Frp内网穿透
 CONFIG_PACKAGE_luci-app-flowoffload=n #开源 Linux Flow Offload 驱动
