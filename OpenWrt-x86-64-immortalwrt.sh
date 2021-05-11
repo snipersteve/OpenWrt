@@ -21,6 +21,9 @@
 ./scripts/feeds update -a && ./scripts/feeds install -a
 
 # 删除部分默认包
+rm -rf package/lean/luci-theme-argon
+rm -rf package/lean/v2ray-plugin
+rm -rf feeds/packages/net/haproxy
 rm -rf package/lean/luci-app-sfe
 rm -rf package/lean/luci-app-flowoffload
 
@@ -34,11 +37,9 @@ svn co https://github.com/db-one/dbone-packages/branches/19.07/luci-app-socat pa
 
 
 # 自定义定制选项
-ZZZ="package/default-settings/files/zzz-default-settings"
+ZZZ="package/lean/default-settings/files/zzz-default-settings"
 #
 sed -i 's#192.168.1.1#192.168.0.1#g' package/base-files/files/bin/config_generate 	      #定制默认IP
-sed -i 's#max-width:200px#max-width:1000px#g' feeds/luci/modules/luci-mod-admin-full/luasrc/view/admin_status/index.htm #修改首页样式
-sed -i 's#max-width:200px#max-width:1000px#g' feeds/luci/modules/luci-mod-admin-full/luasrc/view/admin_status/index_x86.htm #修改X86首页样式
 sed -i 's@.*CYXluq4wUazHjmCDBCqXF*@#&@g' $ZZZ                                             # 取消系统默认密码
 sed -i "/uci commit system/i\uci set system.@system[0].hostname='OpenWrt-X86'" $ZZZ       # 修改主机名称为OpenWrt-X86
 sed -i "s/OpenWrt /Jinlife build $(TZ=UTC-8 date "+%Y.%m.%d") @ OpenWrt /g" $ZZZ          # 增加自己个性名称
@@ -149,13 +150,58 @@ cat >> .config <<EOF
 CONFIG_PACKAGE_luci-app-poweroff=y #关机（增加关机功能）
 CONFIG_PACKAGE_luci-theme-edge=y #edge主题
 CONFIG_PACKAGE_luci-app-autotimeset=y #定时重启系统，网络
+
+CONFIG_PACKAGE_coremark=n # Coremark跑分
+
+#GPU WIFI驱动
+CONFIG_PACKAGE_amdgpu-firmware=n
+CONFIG_PACKAGE_ath10k-board-qca9888=n
+CONFIG_PACKAGE_ath10k-board-qca988x=n
+CONFIG_PACKAGE_ath10k-board-qca9984=n
+CONFIG_PACKAGE_ath10k-firmware-qca9888=n
+CONFIG_PACKAGE_ath10k-firmware-qca988x=n
+CONFIG_PACKAGE_ath10k-firmware-qca9984=n
+
+#EFI相关
+CONFIG_PACKAGE_grub2=n
+CONFIG_PACKAGE_grub2-efi=n
+
+#视频和摄像头
+CONFIG_PACKAGE_kmod-backlight=n
+CONFIG_PACKAGE_kmod-backlight-pwm=n
+CONFIG_PACKAGE_kmod-drm=n
+CONFIG_PACKAGE_kmod-drm-amdgpu=n
+CONFIG_PACKAGE_kmod-drm-kms-helper=n
+CONFIG_PACKAGE_kmod-drm-radeon=n
+CONFIG_PACKAGE_kmod-drm-ttm=n
+CONFIG_PACKAGE_kkmod-fb=n
+CONFIG_PACKAGE_kkmod-fb-cfb-copyarea=n
+CONFIG_PACKAGE_kkmod-fb-cfb-fillrect=n
+CONFIG_PACKAGE_kkmod-fb-cfb-imgblt=n
+CONFIG_PACKAGE_kkmod-fb-sys-fops=n
+CONFIG_PACKAGE_kkmod-fb-sys-ram=n
+
+# 扩展包
+CONFIG_PACKAGE_kmod-mmc=n
+CONFIG_PACKAGE_kmod-mmc-spi=n
+CONFIG_PACKAGE_kmod-nf-nathelper=n
+CONFIG_PACKAGE_kmod-nf-nathelper-extra=n
+EOF
+
+# ShadowsocksR插件:
+cat >> .config <<EOF
+CONFIG_PACKAGE_luci-app-ssr-plus=n
+CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Xray=n
+CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Shadowsocks=n
+CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_ShadowsocksR_Server=n
+CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_ShadowsocksR_Socks=n
 EOF
 
 # Passwall插件:
 cat >> .config <<EOF
 CONFIG_PACKAGE_luci-app-passwall=y
 CONFIG_PACKAGE_https-dns-proxy=y
-CONFIG_PACKAGE_naiveproxy=n
+CONFIG_PACKAGE_naiveproxy=y
 CONFIG_PACKAGE_kcptun-client=y
 CONFIG_PACKAGE_chinadns-ng=y
 CONFIG_PACKAGE_brook=y
@@ -165,18 +211,16 @@ EOF
 # 常用LuCI插件:
 cat >> .config <<EOF
 CONFIG_PACKAGE_luci-app-webadmin=y #Web管理页面设置
+CONFIG_PACKAGE_luci-app-ddns=y #DDNS服务
+CONFIG_PACKAGE_luci-app-vlmcsd=y #KMS激活服务器
 CONFIG_PACKAGE_luci-app-filetransfer=y #系统-文件传输
 CONFIG_PACKAGE_luci-app-upnp=y #通用即插即用UPnP(端口自动转发)
-CONFIG_PACKAGE_luci-app-vlmcsd=y #KMS激活服务器
-CONFIG_PACKAGE_luci-app-ddns=y #DDNS服务
-# CONFIG_PACKAGE_luci-app-control-mia=y #时间控制
-CONFIG_PACKAGE_luci-app-control-webrestriction=y #访问限制
-CONFIG_PACKAGE_luci-app-control-weburl=y #网址过滤
+CONFIG_PACKAGE_luci-app-accesscontrol=y #上网时间控制
 CONFIG_PACKAGE_luci-app-nlbwmon=y #宽带流量监控
 CONFIG_PACKAGE_luci-app-wrtbwmon=y #实时流量监测
 CONFIG_PACKAGE_luci-app-xlnetacc=y #迅雷快鸟
-CONFIG_PACKAGE_luci-app-arpbind=y #IP/MAC ARP绑定
 CONFIG_PACKAGE_luci-app-adguardhome=y #ADguardHome去广告服务
+CONFIG_PACKAGE_luci-app-arpbind=y #IP/MAC ARP绑定
 CONFIG_PACKAGE_luci-app-socat=y #IPV6 端口映射 IPV4
 
 CONFIG_PACKAGE_luci-app-frpc=n #Frp内网穿透
@@ -184,19 +228,22 @@ CONFIG_PACKAGE_luci-app-flowoffload=n #开源 Linux Flow Offload 驱动
 CONFIG_PACKAGE_luci-app-autoreboot=n #定时重启
 CONFIG_PACKAGE_luci-app-sfe=n #高通开源的 Shortcut FE 转发加速引擎
 CONFIG_PACKAGE_luci-app-adbyby-plus=n #adbyby去广告
-CONFIG_PACKAGE_luci-app-wol=n #网络唤醒
-CONFIG_PACKAGE_luci-app-control-timewol=n #定时唤醒
 CONFIG_PACKAGE_luci-app-smartdns=n #smartdns服务器
+CONFIG_PACKAGE_luci-app-wol=n #网络唤醒
+CONFIG_PACKAGE_luci-app-haproxy-tcp=n #Haproxy负载均衡
 CONFIG_PACKAGE_luci-app-diskman=n #磁盘管理磁盘信息
-CONFIG_PACKAGE_luci-app-unblockmusic=n #解锁网易云灰色歌曲
-CONFIG_PACKAGE_luci-app-unblockneteasemusic-go=n #解锁网易云灰色歌曲
-CONFIG_PACKAGE_luci-app-unblockneteasemusic-mini=n #解锁网易云灰色歌曲
-CONFIG_PACKAGE_luci-app-usb-printer=n #USB打印机
-CONFIG_PACKAGE_luci-app-mwan3helper=n #多拨负载均衡
-CONFIG_PACKAGE_luci-app-mwan3=n #多线多拨
+CONFIG_PACKAGE_luci-app-transmission=n #TR离线下载
+CONFIG_PACKAGE_luci-app-qbittorrent=n #QB离线下载
+CONFIG_PACKAGE_luci-app-amule=n #电驴离线下载
+CONFIG_PACKAGE_luci-app-zerotier=n #zerotier内网穿透
 CONFIG_PACKAGE_luci-app-hd-idle=n #磁盘休眠
-CONFIG_PACKAGE_luci-app-zerotier=n #Zerotier内网穿透
+CONFIG_PACKAGE_luci-app-unblockmusic=n #解锁网易云灰色歌曲
+CONFIG_PACKAGE_luci-app-airplay2=n #Apple AirPlay2音频接收服务器
+CONFIG_PACKAGE_luci-app-music-remote-center=n #PCHiFi数字转盘遥控
+CONFIG_PACKAGE_luci-app-usb-printer=n #USB打印机
 CONFIG_PACKAGE_luci-app-sqm=n #SQM智能队列管理
+CONFIG_PACKAGE_luci-app-jd-dailybonus=n #京东签到服务
+CONFIG_PACKAGE_luci-app-uugamebooster=n #UU游戏加速器
 #
 # passwall相关(禁用):
 #
@@ -213,6 +260,8 @@ CONFIG_PACKAGE_luci-app-brook-server=n #brook服务端
 CONFIG_PACKAGE_luci-app-ssr-libev-server=n #ssr-libev服务端
 CONFIG_PACKAGE_luci-app-ssr-python-pro-server=n #ssr-python服务端
 CONFIG_PACKAGE_luci-app-kcptun=n #Kcptun客户端
+CONFIG_PACKAGE_luci-app-ipsec-vpnd=n #ipsec VPN服务
+CONFIG_PACKAGE_luci-app-openvpn-server=n #openvpn服务
 CONFIG_PACKAGE_luci-app-softethervpn=n #SoftEtherVPN服务器
 #
 # 文件共享相关(禁用):
@@ -245,7 +294,6 @@ CONFIG_PACKAGE_nano=y
 # CONFIG_PACKAGE_vim-fuller=y
 CONFIG_PACKAGE_wget=y
 CONFIG_PACKAGE_bash=y
-# CONFIG_PACKAGE_node=y
 CONFIG_PACKAGE_kmod-tun=y
 CONFIG_PACKAGE_libcap=y
 CONFIG_PACKAGE_libcap-bin=y
