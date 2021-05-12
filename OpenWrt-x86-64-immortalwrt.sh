@@ -188,6 +188,7 @@ CONFIG_PACKAGE_kmod-nf-nathelper=n
 CONFIG_PACKAGE_kmod-nf-nathelper-extra=n
 
 CONFIG_NODEJS_14=n
+CONFIG_NODEJS_12=n
 CONFIG_PACKAGE_node=n
 CONFIG_PACKAGE_libopenssl=y
 CONFIG_PACKAGE_libopenssl-conf=y
