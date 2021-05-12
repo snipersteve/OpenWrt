@@ -34,7 +34,7 @@ on:
 
 env:
   REPO_URL: https://github.com/immortalwrt/immortalwrt
-  REPO_BRANCH: openwrt-19.07
+  REPO_BRANCH: openwrt-18.06
   DIY_SH: OpenWrt-x86-64-immortalwrt.sh
   TZ: Asia/Shanghai
 
