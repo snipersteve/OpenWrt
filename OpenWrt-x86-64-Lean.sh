@@ -16,7 +16,7 @@ git clone https://github.com/db-one/dbone-packages.git -b 18.06 package/dbone-pa
 ./scripts/feeds update -a && ./scripts/feeds install -a
 
 # 删除部分默认包
-rm -rf package/lean/luci-theme-argon
+# rm -rf package/lean/luci-theme-argon
 rm -rf package/lean/v2ray-plugin
 rm -rf feeds/packages/net/haproxy
 rm -rf package/lean/luci-app-sfe
@@ -25,10 +25,10 @@ rm -rf package/lean/luci-app-flowoffload
 # 自定义定制选项
 ZZZ="package/lean/default-settings/files/zzz-default-settings"
 #
-sed -i 's#192.168.1.1#192.168.0.1#g' package/base-files/files/bin/config_generate #定制默认IP
+# sed -i 's#192.168.1.1#192.168.0.1#g' package/base-files/files/bin/config_generate #定制默认IP
 sed -i 's@.*CYXluq4wUazHjmCDBCqXF*@#&@g' $ZZZ                                             # 取消系统默认密码
 sed -i "/uci commit system/i\uci set system.@system[0].hostname='OpenWrt-X86'" $ZZZ       # 修改主机名称为OpenWrt-X86
-sed -i "s/OpenWrt /Jinlife build $(TZ=UTC-8 date "+%Y.%m.%d") @ OpenWrt /g" $ZZZ              # 增加自己个性名称
+sed -i "s/OpenWrt /steve build $(TZ=UTC-8 date "+%Y.%m.%d") @ OpenWrt /g" $ZZZ              # 增加自己个性名称
 
 sed -i 's#option commit_interval 24h#option commit_interval 60m#g' feeds/packages/net/nlbwmon/files/nlbwmon.config               # 修改流量统计写入为60分钟
 sed -i 's#option database_directory /var/lib/nlbwmon#option database_directory /etc/config/nlbwmon_data#g' feeds/packages/net/nlbwmon/files/nlbwmon.config               # 修改流量统计数据存放默认位置
