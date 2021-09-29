@@ -25,7 +25,7 @@ rm -rf package/lean/luci-app-flowoffload
 # 自定义定制选项
 ZZZ="package/lean/default-settings/files/zzz-default-settings"
 #
-# sed -i 's#192.168.1.1#192.168.0.1#g' package/base-files/files/bin/config_generate #定制默认IP
+sed -i 's#192.168.1.10#192.168.0.1#g' package/base-files/files/bin/config_generate #定制默认IP
 sed -i 's@.*CYXluq4wUazHjmCDBCqXF*@#&@g' $ZZZ                                             # 取消系统默认密码
 sed -i "/uci commit system/i\uci set system.@system[0].hostname='OpenWrt-X86'" $ZZZ       # 修改主机名称为OpenWrt-X86
 sed -i "s/OpenWrt /steve build $(TZ=UTC-8 date "+%Y.%m.%d") @ OpenWrt /g" $ZZZ              # 增加自己个性名称
@@ -99,8 +99,8 @@ EOF
 
 # IPv6支持:
 cat >> .config <<EOF
-CONFIG_PACKAGE_dnsmasq_full_dhcpv6=y
-CONFIG_PACKAGE_ipv6helper=y
+CONFIG_PACKAGE_dnsmasq_full_dhcpv6=n
+CONFIG_PACKAGE_ipv6helper=n
 EOF
 
 # 编译VMware镜像以及镜像填充
@@ -138,7 +138,7 @@ CONFIG_PACKAGE_luci-app-poweroff=y #关机（增加关机功能）
 CONFIG_PACKAGE_luci-theme-edge=y #edge主题
 CONFIG_PACKAGE_luci-app-autotimeset=y #定时重启系统，网络
 
-CONFIG_PACKAGE_coremark=n # Coremark跑分
+CONFIG_PACKAGE_coremark=y # Coremark跑分
 
 #GPU WIFI驱动
 CONFIG_PACKAGE_amdgpu-firmware=n
